@@ -9,13 +9,13 @@ export default function page() {
       <h3>Navigation</h3>
       <ul>
         <li>
-          <Link href = "/login">Login</Link>
+          <Link href="/login">Login</Link>
         </li>
         <li>
-          <Link href = "/chat">Chat</Link>
+          <Link href="/chat">Chat</Link>
         </li>
         <li>
-          <Link href = "/signup">Signup</Link>
+          <Link href="/signup">Signup</Link>
         </li>
       </ul>
     </div>

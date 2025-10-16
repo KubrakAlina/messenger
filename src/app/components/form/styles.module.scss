@@ -1,0 +1,18 @@
+.container {
+  align-items: center;
+  text-align: center;
+  background-color: rgb(177, 240, 202);
+  border-radius: 15px;
+  margin: 0 auto;
+  padding: 20px;
+  width: fit-content;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin: 6px;
+}

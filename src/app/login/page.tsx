@@ -1,10 +1,13 @@
 import DefaultLayout from "../components/layout/layout";
+import LoginUser from "../components/form/loginUser";
 
- function LoginPage() {
-  return (
+function LoginUserPage() {
+
+  return(
   <DefaultLayout>
-    <h2>LoginPage</h2>
+    <LoginUser />
   </DefaultLayout>
-  );
+  )
 }
-export default LoginPage;
+
+export default LoginUserPage;
