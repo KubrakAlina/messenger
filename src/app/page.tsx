@@ -1,11 +1,9 @@
-import DefaultLayout from "./components/layout/layout";
 import Link from "next/link";
 
 export default function page() {
   return (
-  <DefaultLayout>
-    <h2>Start here</h2>
-    <div>
+    <>
+      <h2>Start here</h2>
       <h3>Navigation</h3>
       <ul>
         <li>
@@ -18,7 +16,6 @@ export default function page() {
           <Link href="/signup">Signup</Link>
         </li>
       </ul>
-    </div>
-  </DefaultLayout>
+    </>
   );
 }
