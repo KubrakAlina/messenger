@@ -1,13 +1,24 @@
-import "./styles/styles.scss";
+import DefaultLayout from "./components/layout/layout";
+import Link from "next/link";
 
-export default function Home() {
+export default function page() {
   return (
-  <html>
-    <body className="page">
-      <main>
-        <p>start</p>
-      </main>
-    </body>
-  </html>
+  <DefaultLayout>
+    <h2>Start here</h2>
+    <div>
+      <h3>Navigation</h3>
+      <ul>
+        <li>
+          <Link href = "/login">Login</Link>
+        </li>
+        <li>
+          <Link href = "/chat">Chat</Link>
+        </li>
+        <li>
+          <Link href = "/signup">Signup</Link>
+        </li>
+      </ul>
+    </div>
+  </DefaultLayout>
   );
 }
