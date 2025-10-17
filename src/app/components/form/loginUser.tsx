@@ -1,7 +1,8 @@
 "use client"
 import { useState } from "react";
-import  users from "../../../data/userData";
+import  users from "../../../data/db.json";
 import s from "./styles.module.scss";
+import { permanentRedirect } from "next/navigation";
 
 function LoginUser() {
   const [username, setUsername] = useState("");
@@ -9,12 +10,12 @@ function LoginUser() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    const user = users.find((u) => u.username === username && u.password === password);
+    const user = users.users.find((u) => u.username === username && u.password === password);
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
-      console.log("user finded");
+      permanentRedirect("/chats")
     } else {
-      console.log("not user");
+       permanentRedirect("/signup");
     }
   }
 

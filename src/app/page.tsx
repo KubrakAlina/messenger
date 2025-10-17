@@ -10,7 +10,7 @@ export default function page() {
           <Link href="/login">Login</Link>
         </li>
         <li>
-          <Link href="/chat">Chat</Link>
+          <Link href="/chats">Chat</Link>
         </li>
         <li>
           <Link href="/signup">Signup</Link>
