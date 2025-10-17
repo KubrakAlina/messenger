@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import  users from "../../lib/mockData";
+import  users from "../../../data/userData";
 import s from "./styles.module.scss";
 
 function LoginUser() {
