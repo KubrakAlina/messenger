@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import  users from "../../../data/db.json";
+import FetchData from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import { permanentRedirect } from "next/navigation";
 
@@ -8,9 +8,13 @@ function LoginUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const user = users.users.find((u) => u.username === username && u.password === password);
+    const users = await FetchData("users");
+    console.log(users);
+
+    const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
       permanentRedirect("/chats")
