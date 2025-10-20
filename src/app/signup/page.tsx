@@ -1,6 +1,8 @@
+ import SignupUser from "../components/form/signupUser";
+
  function SignupPage() {
   return (
-    <h2>SignupPage</h2>
+    <SignupUser />
   );
 }
 export default SignupPage;

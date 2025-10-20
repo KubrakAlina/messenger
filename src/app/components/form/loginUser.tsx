@@ -2,12 +2,12 @@
 import { useState } from "react";
 import FetchData from "../fetchData/fetchData";
 import s from "./styles.module.scss";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function LoginUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
 
   const handleLogin = async (e: React.FormEvent) => {

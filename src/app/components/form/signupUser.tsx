@@ -1,31 +1,37 @@
 "use client"
 import { useState } from "react";
-import FetchData from "../fetchData/fetchData";
+import PostData from "../getData/postData";
 import s from "./styles.module.scss";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-function LoginUser() {
+function SignupUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter()
 
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    const users = await FetchData("users");
-    const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+    const newUser = {
+      username,
+      password,
+    };
+    const result = await PostData("users", newUser);
+
+    if (result) {
+      alert("New user added");
+      setUsername("");
+      setPassword("");
       router.push('/chats')
     } else {
-      router.push('/signup')
+      alert("Ooops");
+      router.push('/')
     }
   }
 
   return(
     <div className = {s.container}>
-      <form className = {s.form} onSubmit={handleLogin}>
-        <h2>Login</h2>
+      <form className = {s.form} onSubmit={handleSignup}>
+        <h2>SignUp</h2>
         <input className = {s.input} type = "text"
         placeholder = "Name"
         value = {username}
@@ -36,10 +42,10 @@ function LoginUser() {
         value = {password}
         onChange = {(e) => setPassword(e.target.value)}
          />
-         <button type="submit">Go</button>
+         <button type="submit">SignUp</button>
       </form>
     </div>
   )
 }
 
-export default LoginUser;
+export default SignupUser;
