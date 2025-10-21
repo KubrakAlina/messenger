@@ -15,7 +15,6 @@ function Chat() {
         const loadMessages = async () => {
           const messagesData = await fetchMessages();
           const filteredMessages = filterMessages(parsedUser, messagesData);
-          console.log({filteredMessages})
           setMessages(filteredMessages);
         }
         loadMessages();
@@ -27,9 +26,6 @@ function Chat() {
     }
   }, []);
 
-
-
-console.log(messages)
   return (messages &&
     <ul>
       {messages.map((message: MessageData) => (
@@ -46,7 +42,6 @@ function filterMessages(user: UserData , messages: MessageData[]): MessageData[]
   for (const message of messages) {
     if (message.from === user.id) {
       sortedMessages.push(message);
-      console.log(message)
     }
   }
   return sortedMessages;
