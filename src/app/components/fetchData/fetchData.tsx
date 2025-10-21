@@ -12,9 +12,9 @@ export interface MessageData {
   password: string;
 }
 
-export async function fetchData(url:string) {
+export async function fetchUser(): Promise<UserData[]> {
   try {
-    const urlForFetch = `http://localhost:3004/${url}`;
+    const urlForFetch = `http://localhost:3004/users`;
     const response = await fetch(urlForFetch);
 
     if (!response.ok) {
@@ -25,7 +25,7 @@ export async function fetchData(url:string) {
     return data;
   } catch (error) {
     console.error("Loading error:", error);
-    return null;
+    return [];
   }
 }
 

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import {fetchData} from "../fetchData/fetchData";
+import {fetchUser} from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,7 @@ function LoginUser() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const users = await fetchData("users");
+    const users = await fetchUser();
     const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
