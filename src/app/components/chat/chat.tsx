@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Message from "../message/message";
 import { type MessageData, UserData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
+import SendMessage from "../form/sendMessage";
 
 function Chat() {
   const [messages, setMessages] = useState<MessageData[]>([]);
@@ -52,6 +53,7 @@ function Chat() {
         )
         })}
       </ul>
+      <SendMessage />
     </div>
   );
 }

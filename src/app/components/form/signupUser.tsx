@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import PostData from "../postData/postData";
+import { PostData } from "../postData/postData";
 import s from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 
