@@ -1,12 +1,14 @@
 "use client"
 import { fetchMessages } from "../fetchData/fetchData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Message from "../message/message";
 import { type MessageData, UserData } from "../fetchData/fetchData";
+import s from "./styles.module.scss";
 
 function Chat() {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [user, setUser] = useState<UserData>();
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -28,17 +30,29 @@ function Chat() {
     }
   }, []);
 
+  useLayoutEffect(() => {
+    const chat = chatRef.current;
+    if (!chat) return;
+
+    const prev = chat.style.scrollBehavior;
+    chat.style.scrollBehavior = "auto";
+    chat.scrollTop = chat.scrollHeight;
+    chat.style.scrollBehavior = prev;
+  }, [messages]);
+
   return (messages &&
-    <ul>
+    <div className={s.chat_container} ref={chatRef}>
+      <ul className={s.messages_list}>
       {messages.map((message: MessageData) => {
         const isMyMessage = message.from === user?.id;
         return (
         <li key={message.id}>
           <Message data={message} my={isMyMessage} />
         </li>
-      )
-      })}
-    </ul>
+        )
+        })}
+      </ul>
+    </div>
   );
 }
 
