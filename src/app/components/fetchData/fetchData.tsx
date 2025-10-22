@@ -12,6 +12,11 @@ export interface MessageData {
   password: string;
 }
 
+  export interface ChatsData {
+  senderId: string;
+  receiverId: string;
+}
+
 export async function fetchUser(): Promise<UserData[]> {
   try {
     const urlForFetch = `http://localhost:3004/users`;
@@ -32,6 +37,23 @@ export async function fetchUser(): Promise<UserData[]> {
 export async function fetchMessages(): Promise<MessageData[]> {
   try {
     const urlForFetch = `http://localhost:3004/messages`;
+    const response = await fetch(urlForFetch);
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Loading error:", error);
+    return [];
+  }
+}
+
+export async function fetchChats(): Promise<ChatsData[]> {
+  try {
+    const urlForFetch = `http://localhost:3004/chats`;
     const response = await fetch(urlForFetch);
 
     if (!response.ok) {

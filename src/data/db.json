@@ -18,6 +18,16 @@
       "password": "12345852"
     }
   ],
+  "chats": [
+    {
+      "senderId": "1",
+      "receiverId": "2"
+    },
+    {
+      "senderId": "1bb1",
+      "receiverId": "2"
+    }
+  ],
   "messages": [
     {
       "id": "1",
