@@ -20,12 +20,14 @@
   ],
   "chats": [
     {
-      "senderId": "1",
-      "receiverId": "2"
+      "id": "1",
+      "user1": "1",
+      "user2": "2"
     },
     {
-      "senderId": "1bb1",
-      "receiverId": "2"
+      "id": "2",
+      "user1": "1bb1",
+      "user2": "2"
     }
   ],
   "messages": [
@@ -328,6 +330,16 @@
       "from": "1",
       "to": "2",
       "text": "See ya!"
+    },
+    {
+      "id": "c2e5",
+      "from": "2",
+      "text": "hello"
+    },
+    {
+      "id": "532b",
+      "from": "2",
+      "text": "hey"
     }
   ]
 }

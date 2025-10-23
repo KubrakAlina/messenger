@@ -17,8 +17,10 @@ function ChatsList () {
         setUser(parsedUser);
         const loadChats = async () => {
           const chatsData = await fetchChats();
-          console.log(chatsData);
-          setChats(chatsData);
+          const fiteredChats = chatsData.filter(
+          (chat) => chat.user1 === parsedUser.id || chat.user2 === parsedUser.id
+        );
+          setChats(fiteredChats);
         }
         loadChats();
       } catch(err) {
@@ -35,10 +37,13 @@ function ChatsList () {
   return(
     <ul>
       {chats.map((item: ChatsData)=> {
-         if (item.receiverId !== user?.id) return null;
+         if (item.user1 !== user?.id && item.user2 !== user?.id) return null;
         return (
-        <li key={item.senderId}>
-          <a onClick={handleClick}>{item.senderId}</a>
+        <li
+          key={item.id}
+          onClick={() => handleClick(item.id)}
+        >
+          Open chat {item.id}
         </li>)
         })
       }

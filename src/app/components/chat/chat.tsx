@@ -2,11 +2,11 @@
 import { fetchMessages } from "../fetchData/fetchData";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Message from "../message/message";
-import { type MessageData, UserData } from "../fetchData/fetchData";
+import { type MessageData, UserData, ChatsData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import SendMessage from "../form/sendMessage";
 
-function Chat() {
+function Chat(chat: ChatsData) {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [user, setUser] = useState<UserData>();
   const chatRef = useRef<HTMLDivElement>(null);
@@ -41,6 +41,13 @@ function Chat() {
     chat.style.scrollBehavior = prev;
   }, [messages]);
 
+  const handleNewMessage = (message: MessageData) => {
+    setMessages((prev) => [...prev, message]);
+  };
+
+  if (!user) return null;
+  const to = chat.user1 === user.id ? chat.user2 : chat.user1;
+
   return (messages &&
     <div className={s.chat_container} ref={chatRef}>
       <ul className={s.messages_list}>
@@ -53,7 +60,7 @@ function Chat() {
         )
         })}
       </ul>
-      <SendMessage />
+      <SendMessage from={user.id} to={to} onSuccess={handleNewMessage}/>
     </div>
   );
 }

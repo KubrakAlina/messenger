@@ -1,27 +1,36 @@
 "use client"
 import { useState } from "react";
 import { postMessage } from "../postData/postData";
+import { type MessageData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 
-// interface MessageProps {
-//   from: string;
-//   to: string;
-// } {from, to}: MessageProps
+interface SendMessageProps {
+  from: string;
+  to: string;
+  onSuccess: (message: MessageData) => void;
+}
 
-function SendMessage() {
+function SendMessage({ from, to, onSuccess }: SendMessageProps) {
   const [text, setText] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!text.trim()) return;
     const newMessage = {
-      from,
-      to,
+      from: from,
+      to: to,
       text
     };
-    await postMessage(newMessage);
-  }
+
+    try {
+      await postMessage(newMessage);
+      setText("");
+      onSuccess(newMessage);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
   return(
     <div className = {s.message_container}>
@@ -30,16 +39,6 @@ function SendMessage() {
         placeholder = "Message"
         value = {text}
         onChange = {(e) => setText(e.target.value)}
-         />
-         <input className = {s.input} type = "text"
-        placeholder = "From"
-        value = {from}
-        onChange = {(e) => setFrom(e.target.value)}
-         />
-         <input className = {s.input} type = "text"
-        placeholder = "To"
-        value = {to}
-        onChange = {(e) => setTo(e.target.value)}
          />
          <button type="submit">Send</button>
       </form>

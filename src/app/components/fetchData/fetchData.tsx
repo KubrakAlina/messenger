@@ -1,5 +1,5 @@
 export interface MessageData {
-    id: string;
+    id?: string;
     from: string;
     to: string;
     text: string
@@ -13,8 +13,9 @@ export interface MessageData {
 }
 
   export interface ChatsData {
-  senderId: string;
-  receiverId: string;
+  id: string;
+  user1: string;
+  user2: string;
 }
 
 export async function fetchUser(): Promise<UserData[]> {
