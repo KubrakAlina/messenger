@@ -29,10 +29,9 @@ function ChatsList () {
     }
   }, [])
 
-  function handleClick() {
-    router.push("/chat");
+  function handleClick(chatId: string) {
+    router.push(`/chat/${chatId}`);
   }
-
 
   return(
     <ul>

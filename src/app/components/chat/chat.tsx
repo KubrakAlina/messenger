@@ -1,35 +1,43 @@
 "use client"
-import { fetchMessages } from "../fetchData/fetchData";
+import { fetchMessages, fetchChats } from "../fetchData/fetchData";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import Message from "../message/message";
 import { type MessageData, UserData, ChatsData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import SendMessage from "../form/sendMessage";
 
-function Chat(chat: ChatsData) {
+interface ChatProps {
+  chatId: string;
+}
+
+function Chat({ chatId }: ChatProps) {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [user, setUser] = useState<UserData>();
+  const [chat, setChat] = useState<ChatsData>();
   const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsedUser: UserData = JSON.parse(storedUser);
-        setUser(parsedUser);
-        const loadMessages = async () => {
-          const messagesData = await fetchMessages();
-          const filteredMessages = filterMessages(parsedUser, messagesData);
-          setMessages(filteredMessages);
-        }
-        loadMessages();
+    const loadChat = async () => {
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser) return;
+      const parsedUser: UserData = JSON.parse(storedUser);
+      setUser(parsedUser);
 
-      } catch(err) {
-        localStorage.removeItem("user");
-        console.error(err);
+      const chats = await fetchChats();
+      const currentChat = chats.find((c) => c.id === chatId);
+      if (!currentChat) {
+        console.error("Can`t found chat");
+        return;
       }
-    }
-  }, []);
+      setChat(currentChat);
+
+      const allMessages = await fetchMessages();
+      const filteredMessages = filterMessages(parsedUser, allMessages, currentChat);
+      setMessages(filteredMessages);
+    };
+
+    loadChat();
+  }, [chatId]);
 
   useLayoutEffect(() => {
     const chat = chatRef.current;
@@ -45,7 +53,7 @@ function Chat(chat: ChatsData) {
     setMessages((prev) => [...prev, message]);
   };
 
-  if (!user) return null;
+  if (!user || !chat) return null;
   const to = chat.user1 === user.id ? chat.user2 : chat.user1;
 
   return (messages &&
@@ -65,14 +73,12 @@ function Chat(chat: ChatsData) {
   );
 }
 
-function filterMessages(user: UserData , messages: MessageData[]): MessageData[] {
-  const sortedMessages: MessageData[] = [];
-  for (const message of messages) {
-    if (message.from === user.id || message.to === user.id) {
-      sortedMessages.push(message);
-    }
-  }
-  return sortedMessages;
+function filterMessages(user: UserData, messages: MessageData[], chat: ChatsData): MessageData[] {
+  return messages.filter(
+    (message) =>
+      (message.from === chat.user1 && message.to === chat.user2) ||
+      (message.from === chat.user2 && message.to === chat.user1)
+  );
 }
 
 export default Chat;
