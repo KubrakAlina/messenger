@@ -1,5 +1,5 @@
 .chat_container {
-  height: 80vh;
+  height: calc(100vh - 70px);
   overflow-y: auto;
   display: flex;
   flex-direction: column;

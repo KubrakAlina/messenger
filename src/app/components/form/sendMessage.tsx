@@ -35,7 +35,7 @@ function SendMessage({ from, to, onSuccess }: SendMessageProps) {
   return(
     <div className = {s.message_container}>
       <form className = {s.form} onSubmit={handleSendMessage}>
-        <input className = {s.input} type = "text"
+        <input id="message" className = {s.input} type = "text"
         placeholder = "Message"
         value = {text}
         onChange = {(e) => setText(e.target.value)}
