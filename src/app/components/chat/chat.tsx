@@ -1,8 +1,8 @@
 "use client"
-import { fetchMessages, fetchChats } from "../fetchData/fetchData";
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
+import { useChatData } from "./hooks/useChatData";
 import Message from "../message/message";
-import { type MessageData, UserData, ChatsData } from "../fetchData/fetchData";
+import { type MessageData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import SendMessage from "../form/sendMessage";
 
@@ -11,33 +11,8 @@ interface ChatProps {
 }
 
 function Chat({ chatId }: ChatProps) {
-  const [messages, setMessages] = useState<MessageData[]>([]);
-  const [user, setUser] = useState<UserData>();
-  const [chat, setChat] = useState<ChatsData>();
+  const { user, chat, messages, addMessage } = useChatData(chatId);
   const chatRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const loadChat = async () => {
-      const storedUser = localStorage.getItem("user");
-      if (!storedUser) return;
-      const parsedUser: UserData = JSON.parse(storedUser);
-      setUser(parsedUser);
-
-      const chats = await fetchChats();
-      const currentChat = chats.find((c) => c.id === chatId);
-      if (!currentChat) {
-        console.error("Can`t found chat");
-        return;
-      }
-      setChat(currentChat);
-
-      const allMessages = await fetchMessages();
-      const filteredMessages = filterMessages(parsedUser, allMessages, currentChat);
-      setMessages(filteredMessages);
-    };
-
-    loadChat();
-  }, [chatId]);
 
   useLayoutEffect(() => {
     const chat = chatRef.current;
@@ -48,10 +23,6 @@ function Chat({ chatId }: ChatProps) {
     chat.scrollTop = chat.scrollHeight;
     chat.style.scrollBehavior = prev;
   }, [messages]);
-
-  const handleNewMessage = (message: MessageData) => {
-    setMessages((prev) => [...prev, message]);
-  };
 
   if (!user || !chat) return null;
   const to = chat.user1 === user.id ? chat.user2 : chat.user1;
@@ -68,17 +39,10 @@ function Chat({ chatId }: ChatProps) {
         )
         })}
       </ul>
-      <SendMessage from={user.id} to={to} onSuccess={handleNewMessage}/>
+      <SendMessage from={user.id} to={to} onSuccess={addMessage}/>
     </div>
   );
 }
 
-function filterMessages(user: UserData, messages: MessageData[], chat: ChatsData): MessageData[] {
-  return messages.filter(
-    (message) =>
-      (message.from === chat.user1 && message.to === chat.user2) ||
-      (message.from === chat.user2 && message.to === chat.user1)
-  );
-}
 
 export default Chat;

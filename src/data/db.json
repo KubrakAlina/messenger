@@ -9,7 +9,7 @@
     {
       "id": "2",
       "username": "ilia",
-      "password": "789456",
+      "password": "123456",
       "name": "Ilia"
     },
     {
@@ -340,6 +340,12 @@
       "id": "532b",
       "from": "2",
       "text": "hey"
+    },
+    {
+      "id": "9f46",
+      "from": "2",
+      "to": "1",
+      "text": "hi"
     }
   ]
 }
