@@ -3,6 +3,7 @@ export interface MessageData {
     from: string;
     to: string;
     text: string
+    createdAt: string;
 }
 
   export interface UserData {
