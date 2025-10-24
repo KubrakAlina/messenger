@@ -1,0 +1,25 @@
+.message_container {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px auto 10px 0;
+  background-color: rgb(233, 241, 118);
+  text-align: left;
+  width: fit-content;
+}
+
+.message_container_my_message {
+  width: fit-content;
+  text-align: right;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0 10px auto;
+  background-color: rgb(206, 118, 241);
+}
+
+.message_body {
+  margin: 0;
+}
+
+.message_time {
+  font-size: 10px;
+}

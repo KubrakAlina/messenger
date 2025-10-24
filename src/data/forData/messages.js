@@ -1,0 +1,12 @@
+// module.exports = [
+//   {
+//     "id": "1",
+//     "author": "alina",
+//     "text": "Hello"
+//   },
+//   {
+//     "id": "2",
+//     "author": "ilia",
+//     "text": "Hi"
+//   }
+// ];

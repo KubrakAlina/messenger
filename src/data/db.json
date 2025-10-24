@@ -1,0 +1,451 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "alina",
+      "password": "123456",
+      "name": "Alina"
+    },
+    {
+      "id": "2",
+      "username": "ilia",
+      "password": "123456",
+      "name": "Ilia"
+    },
+    {
+      "id": "1bb1",
+      "username": "ghjhg",
+      "password": "12345852"
+    }
+  ],
+  "chats": [
+    {
+      "id": "sfjvs",
+      "user1": "1",
+      "user2": "2"
+    },
+    {
+      "id": "nkjn",
+      "user1": "1bb1",
+      "user2": "2"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "from": "2",
+      "to": "1",
+      "text": "Hey!",
+      "createdAt": 1739824170,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "2",
+      "from": "1",
+      "to": "2",
+      "text": "Hi, Ilia!",
+      "createdAt": 1739824205,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "3",
+      "from": "2",
+      "to": "1",
+      "text": "How are you?",
+      "createdAt": 1739824240,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "4",
+      "from": "1",
+      "to": "2",
+      "text": "I'm good, you?",
+      "createdAt": 1739824275,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "5",
+      "from": "2",
+      "to": "1",
+      "text": "Pretty good, just had a busy day.",
+      "createdAt": 1739824310,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "6",
+      "from": "1",
+      "to": "2",
+      "text": "What were you working on?",
+      "createdAt": 1739824345,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "7",
+      "from": "2",
+      "to": "1",
+      "text": "A new web app project, mostly coding.",
+      "createdAt": 1739824380,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "8",
+      "from": "1",
+      "to": "2",
+      "text": "Oh nice! What kind of app?",
+      "createdAt": 1739824415,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "9",
+      "from": "2",
+      "to": "1",
+      "text": "It's a note-taking app with some AI features.",
+      "createdAt": 1739824450,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "10",
+      "from": "1",
+      "to": "2",
+      "text": "That sounds awesome. What stack are you using?",
+      "createdAt": 1739824485,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "11",
+      "from": "2",
+      "to": "1",
+      "text": "React and Node.js, pretty standard stuff.",
+      "createdAt": 1739824520,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "12",
+      "from": "1",
+      "to": "2",
+      "text": "Cool, I've been meaning to learn React.",
+      "createdAt": 1739824555,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "13",
+      "from": "2",
+      "to": "1",
+      "text": "I can help if you want!",
+      "createdAt": 1739824590,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "14",
+      "from": "1",
+      "to": "2",
+      "text": "Really? That would be amazing!",
+      "createdAt": 1739824625,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "15",
+      "from": "2",
+      "to": "1",
+      "text": "Sure, we can start with basics this weekend?",
+      "createdAt": 1739824660,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "16",
+      "from": "1",
+      "to": "2",
+      "text": "Saturday works for me.",
+      "createdAt": 1739824695,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "17",
+      "from": "2",
+      "to": "1",
+      "text": "Perfect. We can meet online?",
+      "createdAt": 1739824730,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "18",
+      "from": "1",
+      "to": "2",
+      "text": "Yeah, Discord maybe?",
+      "createdAt": 1739824765,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "19",
+      "from": "2",
+      "to": "1",
+      "text": "Sounds good. I'll make a private server.",
+      "createdAt": 1739824800,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "20",
+      "from": "1",
+      "to": "2",
+      "text": "Cool! Send me the invite when ready.",
+      "createdAt": 1739824835,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "21",
+      "from": "2",
+      "to": "1",
+      "text": "Just sent it!",
+      "createdAt": 1739824870,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "22",
+      "from": "1",
+      "to": "2",
+      "text": "Got it. Joined.",
+      "createdAt": 1739824905,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "23",
+      "from": "2",
+      "to": "1",
+      "text": "Nice! We can share code there.",
+      "createdAt": 1739824940,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "24",
+      "from": "1",
+      "to": "2",
+      "text": "By the way, how long have you been coding?",
+      "createdAt": 1739824975,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "25",
+      "from": "2",
+      "to": "1",
+      "text": "About 4 years now.",
+      "createdAt": 1739825010,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "26",
+      "from": "1",
+      "to": "2",
+      "text": "Impressive! I'm still a beginner.",
+      "createdAt": 1739825045,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "27",
+      "from": "2",
+      "to": "1",
+      "text": "Everyone starts somewhere!",
+      "createdAt": 1739825080,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "28",
+      "from": "1",
+      "to": "2",
+      "text": "True. What was your first language?",
+      "createdAt": 1739825115,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "29",
+      "from": "2",
+      "to": "1",
+      "text": "Python. It's great for learning.",
+      "createdAt": 1739825150,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "30",
+      "from": "1",
+      "to": "2",
+      "text": "Oh, I like Python too!",
+      "createdAt": 1739825185,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "31",
+      "from": "2",
+      "to": "1",
+      "text": "Then React will be easy for you.",
+      "createdAt": 1739825220,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "32",
+      "from": "1",
+      "to": "2",
+      "text": "I hope so haha.",
+      "createdAt": 1739825255,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "33",
+      "from": "2",
+      "to": "1",
+      "text": "Do you have any projects in mind?",
+      "createdAt": 1739825290,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "34",
+      "from": "1",
+      "to": "2",
+      "text": "Maybe a recipe app or something simple.",
+      "createdAt": 1739825325,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "35",
+      "from": "2",
+      "to": "1",
+      "text": "That's a great idea!",
+      "createdAt": 1739825360,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "36",
+      "from": "1",
+      "to": "2",
+      "text": "Thanks! I'd love to make it look nice too.",
+      "createdAt": 1739825395,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "37",
+      "from": "2",
+      "to": "1",
+      "text": "We can go over UI frameworks as well.",
+      "createdAt": 1739825430,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "38",
+      "from": "1",
+      "to": "2",
+      "text": "Like Tailwind?",
+      "createdAt": 1739825465,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "39",
+      "from": "2",
+      "to": "1",
+      "text": "Exactly, Tailwind is perfect.",
+      "createdAt": 1739825500,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "40",
+      "from": "1",
+      "to": "2",
+      "text": "Cool, I’ve heard it’s super customizable.",
+      "createdAt": 1739825535,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "41",
+      "from": "2",
+      "to": "1",
+      "text": "Yep, and easy to learn too.",
+      "createdAt": 1739825570,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "42",
+      "from": "1",
+      "to": "2",
+      "text": "Nice. By the way, what time on Saturday?",
+      "createdAt": 1739825605,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "43",
+      "from": "2",
+      "to": "1",
+      "text": "Maybe 3 PM your time?",
+      "createdAt": 1739825640,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "44",
+      "from": "1",
+      "to": "2",
+      "text": "Perfect. I'll be ready.",
+      "createdAt": 1739825675,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "45",
+      "from": "2",
+      "to": "1",
+      "text": "Awesome, I’ll prepare a few examples.",
+      "createdAt": 1739825710,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "46",
+      "from": "1",
+      "to": "2",
+      "text": "You're the best, thanks!",
+      "createdAt": 1739825745,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "47",
+      "from": "2",
+      "to": "1",
+      "text": "No problem, happy to help!",
+      "createdAt": 1739825780,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "48",
+      "from": "1",
+      "to": "2",
+      "text": "Alright, talk soon then.",
+      "createdAt": 1739825815,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "49",
+      "from": "2",
+      "to": "1",
+      "text": "See you Saturday!",
+      "createdAt": 1739825850,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "50",
+      "from": "1",
+      "to": "2",
+      "text": "See ya!",
+      "createdAt": 1739825885,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "fe7c",
+      "from": "1",
+      "to": "2",
+      "text": "hi",
+      "createdAt": 1761318658281,
+      "chatId": "sfjvs"
+    },
+    {
+      "id": "3949",
+      "from": "1",
+      "to": "2",
+      "text": "fevesfvev",
+      "createdAt": 1761318714334,
+      "chatId": "sfjvs"
+    }
+  ]
+}
