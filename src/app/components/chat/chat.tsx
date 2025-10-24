@@ -1,8 +1,7 @@
 "use client"
-import { useRef, useLayoutEffect } from "react";
-import { useChatData } from "./hooks/useChatData";
+import { useRef, useLayoutEffect, useEffect, useState } from "react";
 import Message from "../message/message";
-import { type MessageData } from "../fetchData/fetchData";
+import { ChatsData, fetchChats, fetchMessages, type MessageData, type UserData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import SendMessage from "../form/sendMessage";
 
@@ -11,8 +10,69 @@ interface ChatProps {
 }
 
 function Chat({ chatId }: ChatProps) {
-  const { user, chat, messages, addMessage } = useChatData(chatId);
+  const [user, setUser] = useState<UserData>();
+  const [chat, setChat] = useState<ChatsData>();
+  const [messages, setMessages] = useState<MessageData[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const chatRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const loadChat = async () => {
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser) return;
+      const parsedUser: UserData = JSON.parse(storedUser);
+      setUser(parsedUser);
+
+      const chats = await fetchChats();
+      const currentChat = chats.find((c) => c.id === chatId);
+      if (!currentChat) {
+        console.error("Can't find chat");
+        return;
+      }
+      setChat(currentChat);
+    };
+    loadChat();
+  }, [chatId]);
+
+  useEffect(() => {
+    const loadMessages = async () => {
+      if(!hasMore) return;
+        try {
+          const newMessages = await fetchMessages({
+            chatId,
+            page
+          });
+
+          setMessages((prev) => [...newMessages.reverse(), ...prev]);
+        } catch (err) {
+          console.error("Error fetching messages:", err);
+        } finally {
+          setHasMore(false);
+          setPage(page+1)
+        }
+      }
+
+    loadMessages();
+    const chatEl = chatRef.current;
+    if (!chatEl) return;
+
+    const handleScroll = () => {
+      console.log(chatEl.scrollTop)
+      if (chatEl.scrollTop === 0 ) {
+        loadMessages();
+        setHasMore(true)
+      }
+  };
+
+  chatEl.addEventListener("scroll", handleScroll);
+  return () => chatEl.removeEventListener("scroll", handleScroll);
+
+  }, [chatId, hasMore])
+
+  const addMessage = (message: MessageData) => {
+    setMessages((prev) => [...prev, message]);
+  };
 
   useLayoutEffect(() => {
     const chat = chatRef.current;
@@ -39,7 +99,7 @@ function Chat({ chatId }: ChatProps) {
         )
         })}
       </ul>
-      <SendMessage from={user.id} to={to} onSuccess={addMessage}/>
+      <SendMessage from={user.id} to={to} chatId={chatId} onSuccess={addMessage}/>
     </div>
   );
 }

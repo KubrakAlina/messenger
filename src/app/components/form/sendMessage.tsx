@@ -7,10 +7,11 @@ import s from "./styles.module.scss";
 interface SendMessageProps {
   from: string;
   to: string;
+  chatId: string;
   onSuccess: (message: MessageData) => void;
 }
 
-function SendMessage({ from, to, onSuccess }: SendMessageProps) {
+function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
   const [text, setText] = useState("");
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -19,7 +20,9 @@ function SendMessage({ from, to, onSuccess }: SendMessageProps) {
     const newMessage = {
       from: from,
       to: to,
-      text
+      text,
+      createdAt: Date.now(),
+      chatId,
     };
 
     try {
