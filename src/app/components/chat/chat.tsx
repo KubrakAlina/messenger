@@ -60,8 +60,8 @@ function Chat({ chatId }: ChatProps) {
     const handleScroll = () => {
       console.log(chatEl.scrollTop)
       if (chatEl.scrollTop === 0 ) {
+        setHasMore(true);
         loadMessages();
-        setHasMore(true)
       }
   };
 
