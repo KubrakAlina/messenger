@@ -1,105 +1,110 @@
 "use client"
-import { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import Message from "../message/message";
-import { ChatsData, fetchChats, fetchMessages, type MessageData, type UserData } from "../fetchData/fetchData";
+import { ChatsData, fetchMessages, type MessageData, type UserData } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import SendMessage from "../form/sendMessage";
 
 interface ChatProps {
-  chatId: string;
+  chat: ChatsData;
+  user: UserData;
+  initMessages: MessageData[];
 }
 
-function Chat({ chatId }: ChatProps) {
-  const [user, setUser] = useState<UserData>();
-  const [chat, setChat] = useState<ChatsData>();
-  const [messages, setMessages] = useState<MessageData[]>([]);
-  const [page, setPage] = useState(1);
+function Chat({ chat, user, initMessages }: ChatProps) {
+  const [messages, setMessages] = useState<MessageData[]>(initMessages);
+  const startFrom = useRef(20);
   const [hasMore, setHasMore] = useState(true);
   const chatRef = useRef<HTMLDivElement>(null);
+  const [shouldScroll, setShouldScroll] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const loadChat = async () => {
-      const storedUser = localStorage.getItem("user");
-      if (!storedUser) return;
-      const parsedUser: UserData = JSON.parse(storedUser);
-      setUser(parsedUser);
+  const loadMessages = async () => {
+    if (!hasMore || isLoading) return;
+    setIsLoading(true);
 
-      const chats = await fetchChats();
-      const currentChat = chats.find((c) => c.id === chatId);
-      if (!currentChat) {
-        console.error("Can't find chat");
-        return;
-      }
-      setChat(currentChat);
-    };
-    loadChat();
-  }, [chatId]);
-
-  useEffect(() => {
-    const loadMessages = async () => {
-      if(!hasMore) return;
-        try {
-          const newMessages = await fetchMessages({
-            chatId,
-            page
-          });
-
-          setMessages((prev) => [...newMessages.reverse(), ...prev]);
-        } catch (err) {
-          console.error("Error fetching messages:", err);
-        } finally {
-          setHasMore(false);
-          setPage(page+1)
-        }
-      }
-
-    loadMessages();
+    //to save position before new loading
     const chatEl = chatRef.current;
     if (!chatEl) return;
+    const prevScrollHeight = chatEl.scrollHeight;
+    const prevScrollTop = chatEl.scrollTop;
 
-    const handleScroll = () => {
-      console.log(chatEl.scrollTop)
-      if (chatEl.scrollTop === 0 ) {
-        setHasMore(true);
-        loadMessages();
-      }
+    //add timeout for loading effect
+    await new Promise((res) => setTimeout(res, 700));
+
+    //fetch new messages
+    const newMessages = await fetchMessages({
+      chatId: chat.id,
+      startFrom: startFrom.current,
+    });
+
+    //check is these messages existent
+    if (newMessages.length > 0) {
+      startFrom.current += 20;
+      setMessages((prev) => [...newMessages, ...prev]);
+      if (newMessages.length < 20) setHasMore(false);
+
+      //fix position when new masseges added
+      requestAnimationFrame(() => {
+        if (!chatEl) return;
+        const newScrollHeight = chatEl.scrollHeight;
+        chatEl.scrollTop = newScrollHeight - (prevScrollHeight - prevScrollTop);
+      });
+    }
+    setIsLoading(false);
   };
 
-  chatEl.addEventListener("scroll", handleScroll);
-  return () => chatEl.removeEventListener("scroll", handleScroll);
-
-  }, [chatId, hasMore])
-
-  const addMessage = (message: MessageData) => {
-    setMessages((prev) => [...prev, message]);
+  //check scroll position and load new messages when needed
+  const handleScroll = (event: React.UIEvent<HTMLElement>) => {
+    const chatEl = event.target as HTMLElement;
+    if (chatEl.scrollTop === 0 && hasMore) {
+      loadMessages();
+    }
   };
 
+  // initial scroll to bottom
   useLayoutEffect(() => {
     const chat = chatRef.current;
-    if (!chat) return;
+    if (chat && shouldScroll) {
+      const chat = chatRef.current;
+      if (!chat) return;
+      chat.style.scrollBehavior = "auto";
+      chat.scrollTop = chat.scrollHeight;
+      setShouldScroll(false);
+    }
+  }, [shouldScroll]);
 
-    const prev = chat.style.scrollBehavior;
-    chat.style.scrollBehavior = "auto";
-    chat.scrollTop = chat.scrollHeight;
-    chat.style.scrollBehavior = prev;
-  }, [messages]);
+  //add sended messages
+  const addMessage = (message: MessageData) => {
+    setMessages((prev) => [...prev, message]);
+    setShouldScroll(true);
+  };
 
-  if (!user || !chat) return null;
-  const to = chat.user1 === user.id ? chat.user2 : chat.user1;
-
-  return (messages &&
-    <div className={s.chat_container} ref={chatRef}>
+  return (
+    <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
+      {isLoading && (
+        <div className={s.loader_wrapper}>
+          <div className={s.loader}></div>
+        </div>
+      )}
       <ul className={s.messages_list}>
-      {messages.map((message: MessageData) => {
-        const isMyMessage = message.from === user?.id;
-        return (
-        <li key={message.id}>
-          <Message data={message} my={isMyMessage} />
-        </li>
-        )
+        {messages.map((message: MessageData) => {
+          const isMyMessage = message.from === user?.id;
+          return (
+            <li key={message.id}>
+              <Message data={message} my={isMyMessage} />
+            </li>
+          )
         })}
       </ul>
-      <SendMessage from={user.id} to={to} chatId={chatId} onSuccess={addMessage}/>
+      {user && chat && (
+        <SendMessage
+          from={user.id}
+          to={chat.user1 === user.id ? chat.user2 : chat.user1}
+          chatId={chat.id}
+          onSuccess={addMessage}
+        />
+      )}
     </div>
   );
 }

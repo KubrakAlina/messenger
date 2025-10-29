@@ -1,20 +1,20 @@
 export interface MessageData {
-    id?: string;
-    from: string;
-    to: string;
-    text: string
-    createdAt: number;
-    chatId: string;
+  id?: string;
+  from: string;
+  to: string;
+  text: string
+  createdAt: number;
+  chatId: string;
 }
 
-  export interface UserData {
+export interface UserData {
   id: string;
   username: string;
   name: string;
   password: string;
 }
 
-  export interface ChatsData {
+export interface ChatsData {
   id: string;
   user1: string;
   user2: string;
@@ -39,14 +39,14 @@ export async function fetchUser(): Promise<UserData[]> {
 
 export async function fetchMessages({
   chatId,
-  page = 1,
+  startFrom = 0,
 }: {
   chatId: string;
-  page?: number;
+  startFrom?: number;
 }): Promise<MessageData[]> {
-  const limit = 20;
+  const endAt = startFrom + 20;
   try {
-    const urlForFetch = `http://localhost:3004/messages?chatId=${chatId}&_sort=-createdAt&_page=${page}&_limit=20`;
+    const urlForFetch = `http://localhost:3004/messages?chatId=${chatId}&_sort=-createdAt&_start=${startFrom}&_end=${endAt}`;
     const response = await fetch(urlForFetch);
 
 
@@ -61,6 +61,28 @@ export async function fetchMessages({
     return [];
   }
 }
+
+// export async function fetchMessagesAtFirst({
+//   chatId,
+// }: {
+//   chatId: string;
+// }): Promise<MessageData[]> {
+//   try {
+//     const urlForFetch = `http://localhost:3004/messages?chatId=${chatId}&_sort=-createdAt&_start=0&_end=20`;
+//     const response = await fetch(urlForFetch);
+
+
+//     if (!response.ok) {
+//       throw new Error(`Error: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     return data.reverse();
+//   } catch (error) {
+//     console.error("Loading error:", error);
+//     return [];
+//   }
+// }
 
 export async function fetchChats(): Promise<ChatsData[]> {
   try {
