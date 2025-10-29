@@ -4,26 +4,26 @@ import { type ChatsData, UserData } from "../fetchData/fetchData";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-function ChatsList () {
+function ChatsList() {
   const router = useRouter();
   const [chats, setChats] = useState<ChatsData[]>([]);
-  const [user, setUser] = useState <UserData>();
+  const [user, setUser] = useState<UserData>();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      try{
+      try {
         const parsedUser: UserData = JSON.parse(storedUser);
         setUser(parsedUser);
         const loadChats = async () => {
           const chatsData = await fetchChats();
           const fiteredChats = chatsData.filter(
-          (chat) => chat.user1 === parsedUser.id || chat.user2 === parsedUser.id
-        );
+            (chat) => chat.user1 === parsedUser.id || chat.user2 === parsedUser.id
+          );
           setChats(fiteredChats);
         }
         loadChats();
-      } catch(err) {
+      } catch (err) {
         console.error(err);
       }
     }
@@ -33,18 +33,18 @@ function ChatsList () {
     router.push(`/chat/${chatId}`);
   }
 
-  return(
+  return (
     <ul>
-      {chats.map((item: ChatsData)=> {
-         if (item.user1 !== user?.id && item.user2 !== user?.id) return null;
+      {chats.map((item: ChatsData) => {
+        if (item.user1 !== user?.id && item.user2 !== user?.id) return null;
         return (
-        <li
-          key={item.id}
-          onClick={() => handleClick(item.id)}
-        >
-          Open chat {item.id}
-        </li>)
-        })
+          <li
+            key={item.id}
+            onClick={() => handleClick(item.id)}
+          >
+            Open chat {item.id}
+          </li>)
+      })
       }
     </ul>
   )

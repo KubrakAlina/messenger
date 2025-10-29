@@ -5,15 +5,15 @@ interface Props {
   children: React.ReactNode;
 }
 
-function DefaultLayout({children}: Props) {
+function DefaultLayout({ children }: Props) {
   return (
-  <html>
-    <body className={s.page}>
-      <main>
-        {children}
-      </main>
-    </body>
-  </html>
+    <html>
+      <body className={s.page}>
+        <main>
+          {children}
+        </main>
+      </body>
+    </html>
   );
 }
 

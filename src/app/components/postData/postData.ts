@@ -1,4 +1,4 @@
-export async function PostData(url:string, data:{ username: string; password: string; }) {
+export async function PostData(url: string, data: { username: string; password: string; }) {
   try {
     const urlForFetch = `http://localhost:3004/${url}`;
     const response = await fetch(urlForFetch, {
@@ -22,7 +22,7 @@ export async function PostData(url:string, data:{ username: string; password: st
   }
 }
 
-export async function postMessage(data: {from: string; to: string; text: string}) {
+export async function postMessage(data: { from: string; to: string; text: string }) {
   try {
     const urlForFetch = `http://localhost:3004/messages`;
     const response = await fetch(urlForFetch, {

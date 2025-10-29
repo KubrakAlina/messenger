@@ -1,6 +1,6 @@
- import SignupUser from "../components/form/signupUser";
+import SignupUser from "../components/form/signupUser";
 
- function SignupPage() {
+function SignupPage() {
   return (
     <SignupUser />
   );

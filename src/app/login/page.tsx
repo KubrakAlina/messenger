@@ -2,7 +2,7 @@ import LoginUser from "../components/form/loginUser";
 
 function LoginUserPage() {
 
-  return(
+  return (
     <LoginUser />
   )
 }

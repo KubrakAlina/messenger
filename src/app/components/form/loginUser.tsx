@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import {fetchUser} from "../fetchData/fetchData";
+import { fetchUser } from "../fetchData/fetchData";
 import s from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 
@@ -22,21 +22,21 @@ function LoginUser() {
     }
   }
 
-  return(
-    <div className = {s.container}>
-      <form className = {s.form} onSubmit={handleLogin}>
+  return (
+    <div className={s.container}>
+      <form className={s.form} onSubmit={handleLogin}>
         <h2>Login</h2>
-        <input className = {s.input} type = "text"
-        placeholder = "Name"
-        value = {username}
-        onChange = {(e) => setUsername(e.target.value)}
-         />
-         <input className = {s.input} type = "text"
-        placeholder = "Password"
-        value = {password}
-        onChange = {(e) => setPassword(e.target.value)}
-         />
-         <button type="submit">Go</button>
+        <input className={s.input} type="text"
+          placeholder="Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input className={s.input} type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Go</button>
       </form>
     </div>
   )

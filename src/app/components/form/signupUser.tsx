@@ -28,21 +28,21 @@ function SignupUser() {
     }
   }
 
-  return(
-    <div className = {s.container}>
-      <form className = {s.form} onSubmit={handleSignup}>
+  return (
+    <div className={s.container}>
+      <form className={s.form} onSubmit={handleSignup}>
         <h2>SignUp</h2>
-        <input className = {s.input} type = "text"
-        placeholder = "Name"
-        value = {username}
-        onChange = {(e) => setUsername(e.target.value)}
-         />
-         <input className = {s.input} type = "text"
-        placeholder = "Password"
-        value = {password}
-        onChange = {(e) => setPassword(e.target.value)}
-         />
-         <button type="submit">SignUp</button>
+        <input className={s.input} type="text"
+          placeholder="Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input className={s.input} type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">SignUp</button>
       </form>
     </div>
   )

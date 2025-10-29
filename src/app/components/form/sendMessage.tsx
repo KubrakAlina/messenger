@@ -17,7 +17,7 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
-    const newMessage = {
+    const messageData = {
       from: from,
       to: to,
       text,
@@ -26,7 +26,7 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
     };
 
     try {
-      await postMessage(newMessage);
+      const newMessage = await postMessage(messageData);
       setText("");
       onSuccess(newMessage);
     } catch (err) {
@@ -35,15 +35,15 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
   };
 
 
-  return(
-    <div className = {s.message_container}>
-      <form className = {s.form} onSubmit={handleSendMessage}>
-        <input id="message" className = {s.input} type = "text"
-        placeholder = "Message"
-        value = {text}
-        onChange = {(e) => setText(e.target.value)}
-         />
-         <button type="submit">Send</button>
+  return (
+    <div className={s.message_container}>
+      <form className={s.form} onSubmit={handleSendMessage}>
+        <input id="message" className={s.input} type="text"
+          placeholder="Message"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button type="submit">Send</button>
       </form>
     </div>
   )

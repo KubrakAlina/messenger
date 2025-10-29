@@ -62,28 +62,6 @@ export async function fetchMessages({
   }
 }
 
-// export async function fetchMessagesAtFirst({
-//   chatId,
-// }: {
-//   chatId: string;
-// }): Promise<MessageData[]> {
-//   try {
-//     const urlForFetch = `http://localhost:3004/messages?chatId=${chatId}&_sort=-createdAt&_start=0&_end=20`;
-//     const response = await fetch(urlForFetch);
-
-
-//     if (!response.ok) {
-//       throw new Error(`Error: ${response.status}`);
-//     }
-
-//     const data = await response.json();
-//     return data.reverse();
-//   } catch (error) {
-//     console.error("Loading error:", error);
-//     return [];
-//   }
-// }
-
 export async function fetchChats(): Promise<ChatsData[]> {
   try {
     const urlForFetch = `http://localhost:3004/chats`;
