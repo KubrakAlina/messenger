@@ -9,8 +9,7 @@ function SignupUser() {
   const [password, setPassword] = useState("");
   const router = useRouter()
 
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSignup = async () => {
     const newUser = {
       username,
       password,
@@ -30,7 +29,7 @@ function SignupUser() {
 
   return (
     <div className={s.container}>
-      <form className={s.form} onSubmit={handleSignup}>
+      <form className={s.form}>
         <h2>SignUp</h2>
         <input className={s.input} type="text"
           placeholder="Name"
@@ -42,7 +41,7 @@ function SignupUser() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">SignUp</button>
+        <button type="submit" onClick={handleSignup}>SignUp</button>
       </form>
     </div>
   )

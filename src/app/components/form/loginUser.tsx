@@ -10,8 +10,7 @@ function LoginUser() {
   const router = useRouter();
 
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     const users = await fetchUser();
     const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
     if (user) {
@@ -24,7 +23,7 @@ function LoginUser() {
 
   return (
     <div className={s.container}>
-      <form className={s.form} onSubmit={handleLogin}>
+      <form className={s.form} >
         <h2>Login</h2>
         <input className={s.input} type="text"
           placeholder="Name"
@@ -36,7 +35,7 @@ function LoginUser() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Go</button>
+        <button type="submit" onClick={handleLogin}>Go</button>
       </form>
     </div>
   )

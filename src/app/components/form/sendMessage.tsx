@@ -14,8 +14,7 @@ interface SendMessageProps {
 function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
   const [text, setText] = useState("");
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendMessage = async () => {
     if (!text.trim()) return;
     const messageData = {
       from: from,
@@ -37,13 +36,13 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
 
   return (
     <div className={s.message_container}>
-      <form className={s.form} onSubmit={handleSendMessage}>
+      <form className={s.form}>
         <input id="message" className={s.input} type="text"
           placeholder="Message"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Send</button>
+        <button type="submit" onClick={handleSendMessage}>Send</button>
       </form>
     </div>
   )
