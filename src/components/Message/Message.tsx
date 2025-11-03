@@ -1,5 +1,5 @@
-import s from "./styles.module.scss"
-import { type MessageData } from "../fetchData/fetchData";
+import s from "./message.module.scss"
+import { type MessageData } from "../../api/types";
 import dayjs from "dayjs";
 
 interface MessageProps {

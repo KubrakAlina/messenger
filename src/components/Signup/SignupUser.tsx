@@ -1,30 +1,36 @@
 "use client"
 import { useState } from "react";
-import { fetchUser } from "../fetchData/fetchData";
-import s from "./styles.module.scss";
+import { postUserData } from "../../api/user/postUserData";
+import s from "./signup.module.scss";
 import { useRouter } from "next/navigation";
 
-function LoginUser() {
+function SignupUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
+  const router = useRouter()
 
+  const handleSignup = async () => {
+    const newUser = {
+      username,
+      password,
+    };
+    const result = await postUserData("users", newUser);
 
-  const handleLogin = async () => {
-    const users = await fetchUser();
-    const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
+    if (result) {
+      alert("New user added");
+      setUsername("");
+      setPassword("");
       router.push('/chats')
     } else {
-      router.push('/signup')
+      alert("Ooops");
+      router.push('/')
     }
   }
 
   return (
     <div className={s.container}>
-      <form className={s.form} >
-        <h2>Login</h2>
+      <form className={s.form}>
+        <h2>SignUp</h2>
         <input className={s.input} type="text"
           placeholder="Name"
           value={username}
@@ -35,10 +41,10 @@ function LoginUser() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" onClick={handleLogin}>Go</button>
+        <button type="submit" onClick={handleSignup}>SignUp</button>
       </form>
     </div>
   )
 }
 
-export default LoginUser;
+export default SignupUser;

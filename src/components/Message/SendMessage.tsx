@@ -1,8 +1,8 @@
 "use client"
 import { useState } from "react";
-import { postMessage } from "../postData/postData";
-import { type MessageData } from "../fetchData/fetchData";
-import s from "./styles.module.scss";
+import { postMessage } from "../../api/messages/postMessage";
+import { type MessageData } from "../../api/types";
+import s from "./message.module.scss";
 
 interface SendMessageProps {
   from: string;
@@ -35,7 +35,7 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
 
 
   return (
-    <div className={s.message_container}>
+    <div className={s.form_container}>
       <form className={s.form}>
         <input id="message" className={s.input} type="text"
           placeholder="Message"

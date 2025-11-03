@@ -1,4 +1,4 @@
-import { type UserData, MessageData, ChatsData } from "../fetchData/fetchData";
+import { type UserData, MessageData, ChatsData } from "@/api/types";
 
 export function filterMessages(user: UserData, messages: MessageData[], chat: ChatsData): MessageData[] {
   return messages.filter(

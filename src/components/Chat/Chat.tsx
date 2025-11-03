@@ -1,9 +1,10 @@
 "use client"
 import { useRef, useLayoutEffect, useState } from "react";
-import Message from "../message/message";
-import { ChatsData, fetchMessages, type MessageData, type UserData } from "../fetchData/fetchData";
-import s from "./styles.module.scss";
-import SendMessage from "../form/sendMessage";
+import Message from "../Message/Message";
+import { type ChatsData, type MessageData, type UserData } from "../../api/types";
+import { fetchMessages } from "../../api/messages/fetchMessages";
+import s from "./chat.module.scss";
+import SendMessage from "../Message/SendMessage";
 
 interface ChatProps {
   chat: ChatsData;

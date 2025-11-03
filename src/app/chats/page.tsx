@@ -1,13 +1,12 @@
-import s from "./styles.module.scss";
-import ChatsList from "../components/chats/chats";
+import Chats from "@/components/Chats/Chats";
 
 function ChatPage() {
   return (
     <>
       <h2>ChatsPage</h2>
-      <div className={s.container}>
+      <div>
         <p>There are your chats</p>
-        <ChatsList />
+        <Chats />
       </div>
     </>
 

@@ -1,7 +1,9 @@
 'use client';
 
-import Chat from "@/app/components/chat/chat";
-import { ChatsData, fetchChats, fetchMessages, MessageData, UserData } from "@/app/components/fetchData/fetchData";
+import Chat from "@/components/Chat/Chat";
+import { type ChatsData, type MessageData, type UserData } from "@/api/types";
+import { fetchChats } from "@/api/chats/fetchChats";
+import { fetchMessages } from "@/api/messages/fetchMessages";
 import { useEffect, useState } from "react";
 
 interface PageProps {

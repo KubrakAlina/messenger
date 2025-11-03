@@ -1,10 +1,10 @@
 "use client"
-import { fetchChats } from "../fetchData/fetchData"
-import { type ChatsData, UserData } from "../fetchData/fetchData";
+import { fetchChats } from "../../api/chats/fetchChats"
+import { type ChatsData, type UserData } from "../../api/types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-function ChatsList() {
+function Chats() {
   const router = useRouter();
   const [chats, setChats] = useState<ChatsData[]>([]);
   const [user, setUser] = useState<UserData>();
@@ -50,4 +50,4 @@ function ChatsList() {
   )
 }
 
-export default ChatsList;
+export default Chats;
