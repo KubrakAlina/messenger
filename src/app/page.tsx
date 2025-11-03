@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogOut from "@/components/LogOut/LogOut";
 
 export default function page() {
   return (
@@ -19,6 +20,7 @@ export default function page() {
           <Link href="/signup">Signup</Link>
         </li>
       </ul>
+      <LogOut />
     </>
   );
 }
