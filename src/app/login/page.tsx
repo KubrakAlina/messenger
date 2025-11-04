@@ -1,8 +1,8 @@
-import LoginUser from "../components/form/loginUser";
+import LoginUser from "../../components/Login/LoginUser";
 
 function LoginUserPage() {
 
-  return(
+  return (
     <LoginUser />
   )
 }
