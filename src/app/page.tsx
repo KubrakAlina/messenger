@@ -1,4 +1,5 @@
 import Link from "next/link";
+import s from "./page.module.scss"
 import LogOut from "@/components/LogOut/LogOut";
 
 export default function page() {
@@ -6,18 +7,18 @@ export default function page() {
     <>
       <h2>Start here</h2>
       <h3>Navigation</h3>
-      <ul>
-        <li>
-          <Link href="/login">Login</Link>
+      <ul className={s.navigation_list}>
+        <li className={s.navigation_item}>
+          <Link className={s.navigation_link} href="/login"> <span>Login</span></Link>
         </li>
-        <li>
-          <Link href="/chats">Chats</Link>
+        <li className={s.navigation_item}>
+          <Link className={s.navigation_link} href="/chats"><span>Chats</span></Link>
         </li>
-        <li>
-          <Link href="/chat">Chat</Link>
+        <li className={s.navigation_item}>
+          <Link className={s.navigation_link} href="/chat"><span>Chat</span></Link>
         </li>
-        <li>
-          <Link href="/signup">Signup</Link>
+        <li className={s.navigation_item}>
+          <Link className={s.navigation_link} href="/signup"><span>Signup</span></Link>
         </li>
       </ul>
       <LogOut />

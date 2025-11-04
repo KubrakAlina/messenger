@@ -42,7 +42,7 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit" onClick={handleSendMessage}>Send</button>
+        <button className={s.button} type="submit" onClick={handleSendMessage}>Send</button>
       </form>
     </div>
   )
