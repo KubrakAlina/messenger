@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { type UserData } from '@/api/types';
 import { fetchUser } from '@/api/user/fetchUser';
+import s from "./searchuser.module.scss"
 
 function UserSearch() {
   const [query, setQuery] = useState('');
@@ -33,10 +34,12 @@ function UserSearch() {
     const delayDebounce = setTimeout(() => {
       if (query.trim().length > 0) {
         const finded = users.current.filter((user => user.username.includes(query.toLowerCase())))
-        setLoading(true);
         setResults(() => [...finded])
-        setLoading(false);
+        if (results) {
+          setLoading(false);
+        }
       } else {
+        setLoading(false);
         setResults([]);
       }
     }, 400);
@@ -45,26 +48,31 @@ function UserSearch() {
   }, [query]);
 
   return (
-    <div className="">
+    <div className={s.container}>
       <input
+        name="user"
         type="text"
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={e => {
+          setLoading(true);
+          setQuery(e.target.value)
+        }}
         placeholder="Find user"
-        className=""
+        className={s.input}
+        autoComplete="off"
       />
 
-      {loading && <p className="">Loading...</p>}
+      {loading && <p>Loading...</p>}
 
-      {results.length > 0 && (
-        <ul className="">
+      {results.length > 0 && !loading && (
+        <ul className={s.list}>
           {results.map(user => (
             <li
               key={user.id}
-              className=""
+              className={s.item}
               onClick={() => router.push(`/chat/${user.id}`)}
             >
-              <p className="">{user.username}</p>
+              <p className={s.user}>{user.username}</p>
             </li>
           ))}
         </ul>
