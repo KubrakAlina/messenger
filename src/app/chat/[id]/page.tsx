@@ -41,7 +41,7 @@ export default function ChatPage({ params }: PageProps) {
     loadInitData();
   }, []);
 
-  if (!chat || !user || !initMessages.length) return null;
+  if (!chat || !user) return null;
 
   return <Chat chat={chat} user={user} initMessages={initMessages} />;
 }

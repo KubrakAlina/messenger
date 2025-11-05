@@ -3,6 +3,7 @@ import { fetchChats } from "../../api/chats/fetchChats"
 import { type ChatsData, type UserData } from "../../api/types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import UserSearch from "../SearchUser/SearchUser";
 
 function Chats() {
   const router = useRouter();
@@ -34,19 +35,22 @@ function Chats() {
   }
 
   return (
-    <ul>
-      {chats.map((item: ChatsData) => {
-        if (item.user1 !== user?.id && item.user2 !== user?.id) return null;
-        return (
-          <li
-            key={item.id}
-            onClick={() => handleClick(item.id)}
-          >
-            Open chat {item.id}
-          </li>)
-      })
-      }
-    </ul>
+    <>
+      <ul>
+        {chats.map((item: ChatsData) => {
+          if (item.user1 !== user?.id && item.user2 !== user?.id) return null;
+          return (
+            <li
+              key={item.id}
+              onClick={() => handleClick(item.id)}
+            >
+              Open chat {item.id}
+            </li>)
+        })
+        }
+      </ul>
+      <UserSearch />
+    </>
   )
 }
 
