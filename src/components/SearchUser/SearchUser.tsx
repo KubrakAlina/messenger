@@ -1,18 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { type UserData } from '@/api/types';
+import { type UserData, ChatsData } from '@/api/types';
 import { fetchUser } from '@/api/user/fetchUser';
+import { postChat } from '@/api/chats/postChats';
+import { useRouter } from 'next/navigation';
 import s from "./searchuser.module.scss"
 
 function UserSearch() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(false);
-  const user = useRef<UserData[]>([])
-  const router = useRouter();
+  const user = useRef<UserData[]>([]);
   const users = useRef<UserData[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     //load all users
@@ -47,6 +48,33 @@ function UserSearch() {
     return () => clearTimeout(delayDebounce);
   }, [query]);
 
+  //create new chat
+  async function createNewChat(userTo: UserData) {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      console.log("no stored user");
+      return;
+    }
+
+    const user = JSON.parse(storedUser) as UserData;
+    const newChat: ChatsData = { user1: user.id, user2: userTo.id };
+    const result = await postChat(newChat);
+    return result;
+  }
+
+  //go to new chat
+  function goToChat(newChatId: string) {
+    router.push(`/chat/${newChatId}`)
+  }
+
+  async function handleClick(user: UserData) {
+    const chat = await createNewChat(user);
+
+    if (chat?.id) {
+      goToChat(chat.id);
+    }
+  }
+
   return (
     <div className={s.container}>
       <input
@@ -70,7 +98,7 @@ function UserSearch() {
             <li
               key={user.id}
               className={s.item}
-              onClick={() => router.push(`/chat/${user.id}`)}
+              onClick={() => handleClick(user)}
             >
               <p className={s.user}>{user.username}</p>
             </li>
@@ -79,7 +107,7 @@ function UserSearch() {
       )}
 
       {!loading && query && results.length === 0 && (
-        <p className="">User don’t found</p>
+        <p>User don’t found</p>
       )}
     </div>
   );

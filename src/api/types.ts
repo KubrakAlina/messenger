@@ -15,7 +15,7 @@ export interface UserData {
 }
 
 export interface ChatsData {
-  id: string;
+  id?: string;
   user1: string;
   user2: string;
 }
