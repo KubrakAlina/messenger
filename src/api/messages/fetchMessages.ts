@@ -4,7 +4,7 @@ export async function fetchMessages({
   chatId,
   startFrom = 0,
 }: {
-  chatId: string;
+  chatId?: string;
   startFrom?: number;
 }): Promise<MessageData[]> {
   const endAt = startFrom + 20;

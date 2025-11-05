@@ -7,7 +7,7 @@ import s from "./message.module.scss";
 interface SendMessageProps {
   from: string;
   to: string;
-  chatId: string;
+  chatId?: string;
   onSuccess: (message: MessageData) => void;
 }
 
