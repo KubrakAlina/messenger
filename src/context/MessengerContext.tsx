@@ -27,10 +27,10 @@ export function MessengerProvider({ children }: { children: ReactNode }) {
       setCurrentUser(JSON.parse(storedUser));
     }
 
-    const storedChat = sessionStorage.getItem("chat")
-    if (storedChat) {
-      setCurrentChat(JSON.parse(storedChat));
-    }
+    // const storedChat = sessionStorage.getItem("chat")
+    // if (storedChat) {
+    //   setCurrentChat(JSON.parse(storedChat));
+    // }
   }, []);
 
   useEffect(() => {

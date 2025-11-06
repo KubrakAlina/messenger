@@ -11,7 +11,7 @@ function Chats() {
   const [chats, setChats] = useState<ChatsData[]>([]);
 
   const context = useContext(MessengerContext);
-  const { currentUser, setCurrentChat } = context;
+  const { currentUser } = context;
 
   useEffect(() => {
     if (currentUser) {
@@ -31,8 +31,8 @@ function Chats() {
   }, [currentUser])
 
   function handleClick(chat: ChatsData) {
-    sessionStorage.setItem("chat", JSON.stringify(chat))
-    setCurrentChat(chat);
+    // sessionStorage.setItem("chat", JSON.stringify(chat))
+    // setCurrentChat(chat);
     router.push(`/chat/${chat.id}`);
   }
 

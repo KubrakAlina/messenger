@@ -8,8 +8,6 @@ import SendMessage from "../Message/SendMessage";
 import MessengerContext from "@/context/MessengerContext";
 
 interface ChatProps {
-  // chat: ChatsData;
-  // user: UserData;
   initMessages: MessageData[];
 }
 
@@ -92,10 +90,11 @@ function Chat({ initMessages }: ChatProps) {
     setShouldScroll(true);
   };
 
-
   if (!messages) {
-    return <><p>There is no messages</p></>
+    return <p>There is no messages</p>;
   }
+
+  console.log({ currentUser, currentChat, chatPartner });
 
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
