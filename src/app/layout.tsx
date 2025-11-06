@@ -1,5 +1,6 @@
 import React from 'react';
 import s from "./layout.module.scss";
+import { MessengerProvider } from '@/context/MessengerContext';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +11,9 @@ function DefaultLayout({ children }: Props) {
     <html>
       <body className={s.page}>
         <main>
-          {children}
+          <MessengerProvider>
+            {children}
+          </MessengerProvider>
         </main>
       </body>
     </html>

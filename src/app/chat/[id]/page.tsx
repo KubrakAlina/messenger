@@ -1,48 +1,42 @@
 'use client';
 
 import Chat from "@/components/Chat/Chat";
-import { type ChatsData, type MessageData, type UserData } from "@/api/types";
-import { fetchChats } from "@/api/chats/fetchChats";
+import { type MessageData } from "@/api/types";
 import { fetchMessages } from "@/api/messages/fetchMessages";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import MessengerContext from "@/context/MessengerContext";
+import { fetchChat } from "@/api/chats/fetchChat";
 
-interface PageProps {
-  params: Promise<{ id: string }>
-}
 
-export default function ChatPage({ params }: PageProps) {
-  const [user, setUser] = useState<UserData>();
-  const [chat, setChat] = useState<ChatsData>();
+export default function ChatPage({ params }: { params: Promise<{ id: string }> }) {
   const [initMessages, setInitMessages] = useState<MessageData[]>([]);
+  const context = useContext(MessengerContext);
+  const { currentUser, currentChat, setCurrentChat } = context;
 
   useEffect(() => {
     async function loadInitData() {
-      const storedUser = localStorage.getItem("user");
-      if (!storedUser) return;
-
-      const parsedUser: UserData = JSON.parse(storedUser);
-      setUser(parsedUser);
-
-      const { id: chatId } = await params;
-      const chats = await fetchChats();
-      const currentChat = chats.find((c) => c.id === chatId);
-      if (!currentChat) {
-        console.error("Can't find chat");
-        return;
-      }
-
-      setChat(currentChat);
-      const messages = await fetchMessages({
-        chatId
-      });
+      const messages = await fetchMessages({ chatId: currentChat!.id });
       setInitMessages(messages);
     }
 
-    loadInitData();
-  }, []);
+    if (currentUser && currentChat) {
+      loadInitData();
+    }
+  }, [currentUser, currentChat]);
 
-  if (!chat || !user) return null;
+  useEffect(() => {
+    params
+      .then(({ id }) => fetchChat(id))
+      .then(setCurrentChat);
 
-  return <Chat chat={chat} user={user} initMessages={initMessages} />;
+    return () => {
+      setCurrentChat(null);
+      setInitMessages([]);
+    }
+  }, [setCurrentChat, params]);
+
+  if (!initMessages) return <p>Loading chat...</p>;
+
+  return <Chat initMessages={initMessages} />;
 }
 
