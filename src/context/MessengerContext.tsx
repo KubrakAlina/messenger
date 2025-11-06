@@ -33,12 +33,6 @@ export function MessengerProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     localStorage.setItem("user", JSON.stringify(currentUser));
-  //   }
-  // }, [currentUser]);
-
   useEffect(() => {
     if (currentChat && currentUser) {
       setChatPartner(currentChat.user1 === currentUser.id ? currentChat.user2 : currentChat.user1)
