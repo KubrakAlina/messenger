@@ -1,5 +1,5 @@
 export interface MessageData {
-  id?: string;
+  id: string;
   from: string;
   to: string;
   text: string

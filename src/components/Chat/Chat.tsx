@@ -1,24 +1,35 @@
 "use client"
-import { useRef, useLayoutEffect, useState } from "react";
+import { useRef, useLayoutEffect, useState, useContext, useEffect } from "react";
 import Message from "../Message/Message";
-import { type ChatsData, type MessageData, type UserData } from "../../api/types";
+import { type MessageData } from "../../api/types";
 import { fetchMessages } from "../../api/messages/fetchMessages";
 import s from "./chat.module.scss";
 import SendMessage from "../Message/SendMessage";
+import MessengerContext from "@/context/MessengerContext";
 
 interface ChatProps {
-  chat: ChatsData;
-  user: UserData;
+  // chat: ChatsData;
+  // user: UserData;
   initMessages: MessageData[];
 }
 
-function Chat({ chat, user, initMessages }: ChatProps) {
+function Chat({ initMessages }: ChatProps) {
   const [messages, setMessages] = useState<MessageData[]>(initMessages);
   const startFrom = useRef(20);
   const [hasMore, setHasMore] = useState(true);
   const chatRef = useRef<HTMLDivElement>(null);
   const [shouldScroll, setShouldScroll] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const context = useContext(MessengerContext);
+  const { currentUser, currentChat, chatPartner } = context;
+
+  useEffect(() => {
+    if (initMessages.length > 0) {
+      setMessages(initMessages);
+      setShouldScroll(true);
+    }
+  }, [initMessages]);
 
   const loadMessages = async () => {
     if (!hasMore || isLoading) return;
@@ -35,7 +46,7 @@ function Chat({ chat, user, initMessages }: ChatProps) {
 
     //fetch new messages
     const newMessages = await fetchMessages({
-      chatId: chat.id,
+      chatId: currentChat?.id,
       startFrom: startFrom.current,
     });
 
@@ -81,6 +92,11 @@ function Chat({ chat, user, initMessages }: ChatProps) {
     setShouldScroll(true);
   };
 
+
+  if (!messages) {
+    return <><p>There is no messages</p></>
+  }
+
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
       {isLoading && (
@@ -90,7 +106,7 @@ function Chat({ chat, user, initMessages }: ChatProps) {
       )}
       <ul className={s.messages_list}>
         {messages.map((message: MessageData) => {
-          const isMyMessage = message.from === user?.id;
+          const isMyMessage = message.from === currentUser?.id;
           return (
             <li key={message.id}>
               <Message data={message} my={isMyMessage} />
@@ -98,11 +114,11 @@ function Chat({ chat, user, initMessages }: ChatProps) {
           )
         })}
       </ul>
-      {user && chat && (
+      {currentUser && currentChat && chatPartner && (
         <SendMessage
-          from={user.id}
-          to={chat.user1 === user.id ? chat.user2 : chat.user1}
-          chatId={chat.id}
+          from={currentUser.id}
+          to={chatPartner}
+          chatId={currentChat.id}
           onSuccess={addMessage}
         />
       )}

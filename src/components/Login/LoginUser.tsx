@@ -9,7 +9,6 @@ function LoginUser() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-
   const handleLogin = async () => {
     const users = await fetchUser();
     const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
@@ -17,6 +16,7 @@ function LoginUser() {
       localStorage.setItem("user", JSON.stringify(user));
       router.push('/chats')
     } else {
+      // toDo: add error and porpose to signup
       router.push('/signup')
     }
   }
