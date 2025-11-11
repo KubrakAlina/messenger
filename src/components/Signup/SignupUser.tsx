@@ -32,16 +32,18 @@ function SignupUser() {
       <form className={s.form}>
         <h2>SignUp</h2>
         <input className={s.input} type="text"
+          id="username"
           placeholder="Name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input className={s.input} type="text"
+          id="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" onClick={handleSignup}>SignUp</button>
+        <button className={s.button} type="submit" onClick={handleSignup}>SignUp</button>
       </form>
     </div>
   )

@@ -1,5 +1,10 @@
+@use "../../app/styles/variables.scss" as *;
+
 .button {
   display: block;
+  font-family: inherit;
+  font-size: 16px;
+  box-sizing: border-box;
   border: none;
   padding: 10px;
   border-radius: 10px;
@@ -7,4 +12,9 @@
   position: absolute;
   top: 0;
   right: 0;
+
+  &:hover,
+  &:active {
+    background-color: $dark-green;
+  }
 }

@@ -1,7 +1,9 @@
+@use "../../app/styles/variables.scss" as *;
+
 .container {
   align-items: center;
   text-align: center;
-  background-color: rgb(177, 240, 202);
+  background-color: $light-green;
   border-radius: 15px;
   margin: 0 auto;
   padding: 20px;
@@ -15,4 +17,24 @@
 
 .input {
   margin: 6px;
+  font-family: inherit;
+  font-size: 14px;
+
+  ::placeholder{
+    font-family: inherit;
+  }
+}
+
+.button {
+  font-family: inherit;
+  font-size: 16px;
+  border: none;
+  margin: 10px;
+  padding: 6px;
+  box-sizing: border-box;
+
+  &:hover,
+  &:active {
+    background-color: $dark-green;
+  }
 }

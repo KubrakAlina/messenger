@@ -40,12 +40,14 @@ function LoginUser() {
           placeholder="Name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete="off"
         />
         <input className={s.input} type="text"
           id="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="off"
         />
         <button className={s.button} type="button" onClick={handleLogin}>Go</button>
       </form>

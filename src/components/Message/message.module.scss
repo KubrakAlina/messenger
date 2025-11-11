@@ -1,8 +1,10 @@
+@use "../../app//styles/variables.scss" as *;
+
 .message_container {
   border-radius: 5px;
   padding: 5px;
   margin: 10px auto 10px 0;
-  background-color: rgb(233, 241, 118);
+  background-color: $light-brown;
   text-align: left;
   max-width: fit-content;
   overflow-wrap: break-word;
@@ -15,7 +17,7 @@
   border-radius: 5px;
   padding: 5px;
   margin: 10px 0 10px auto;
-  background-color: rgb(206, 118, 241);
+  background-color: $light-green;
 }
 
 .message_body {
@@ -42,13 +44,18 @@
 }
 
 .input {
+  font-family: inherit;
   flex-grow: 1;
   height: 28px;
   margin: 0;
   border: none;
+  ::placeholder{
+    font-family: inherit;
+  }
 }
 
 .button {
+  font-family: inherit;
   height: 30px;
   border: none;
   width: 70px;

@@ -98,6 +98,7 @@ function Chat({ initMessages }: ChatProps) {
 
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
+      <h2 className={s.header_title}>{chatPartner}</h2>
       {isLoading && (
         <div className={s.loader_wrapper}>
           <div className={s.loader}></div>

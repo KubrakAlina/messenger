@@ -1,13 +1,11 @@
 import Chats from "@/components/Chats/Chats";
+import s from ".//chats.module.scss";
 
 function ChatPage() {
   return (
     <>
-      <h2>ChatsPage</h2>
-      <div>
-        <p>There are your chats</p>
-        <Chats />
-      </div>
+      <h2 className={s.header_title}>ChatsPage</h2>
+      <Chats />
     </>
 
   );

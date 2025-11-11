@@ -1,13 +1,17 @@
+@use "./styles/variables" as *;
+
 .page {
-  background-color: #bcd4d1;
+  height: 100vh;
+  background-color: $yellow;
   color: #1f0808;
   font-family: 'Courier New', Courier, monospace;
   font-size: 16px;
   font-weight: 400;
   text-align: center;
+  margin: 0;
+}
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+.main {
+  height: 100vh;
+  align-content: center;
 }
