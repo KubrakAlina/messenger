@@ -1,4 +1,7 @@
-.navigation_list{
+@use "./styles/variables" as *;
+
+.navigation_list {
+  padding: 0;
   display: block;
   width: 50%;
   margin: 0 auto;
@@ -7,7 +10,7 @@
 .navigation_item {
   display: block;
   list-style-type: none;
-  background-color:#93aaa7;
+  background-color: $light-green;
   padding: 6px;
   margin: 10px;
   border-radius: 4px;

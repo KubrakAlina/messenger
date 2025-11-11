@@ -10,7 +10,7 @@ function DefaultLayout({ children }: Props) {
   return (
     <html>
       <body className={s.page}>
-        <main>
+        <main className={s.main}>
           <MessengerProvider>
             {children}
           </MessengerProvider>

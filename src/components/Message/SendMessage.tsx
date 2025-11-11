@@ -41,6 +41,7 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
           placeholder="Message"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          autoComplete="off"
         />
         <button className={s.button} type="submit" onClick={handleSendMessage}>Send</button>
       </form>

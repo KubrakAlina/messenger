@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import UserSearch from "../SearchUser/SearchUser";
 import MessengerContext from "@/context/MessengerContext";
+import s from "./chats.module.scss";
 
 function Chats() {
   const router = useRouter();
@@ -31,18 +32,17 @@ function Chats() {
   }, [currentUser])
 
   function handleClick(chat: ChatsData) {
-    // sessionStorage.setItem("chat", JSON.stringify(chat))
-    // setCurrentChat(chat);
     router.push(`/chat/${chat.id}`);
   }
 
   return (
-    <>
-      <ul>
+    <div className={s.container}>
+      <UserSearch />
+      <ul className={s.item_list}>
         {chats.map((item: ChatsData) => {
           if (item.user1 !== currentUser?.id && item.user2 !== currentUser?.id) return null;
           return (
-            <li
+            <li className={s.item}
               key={item.id}
               onClick={() => handleClick(item)}
             >
@@ -51,8 +51,7 @@ function Chats() {
         })
         }
       </ul>
-      <UserSearch />
-    </>
+    </div>
   )
 }
 
