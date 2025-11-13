@@ -2,8 +2,8 @@ import { type UserData } from "../types";
 
 export async function fetchUser(): Promise<UserData[]> {
   try {
-    const urlForFetch = `http://localhost:3004/users`;
-    const response = await fetch(urlForFetch);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${API_URL}/users`);;
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
