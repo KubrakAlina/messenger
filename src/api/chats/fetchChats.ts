@@ -2,8 +2,8 @@ import { type ChatsData } from "../types";
 
 export async function fetchChats(): Promise<ChatsData[]> {
   try {
-    const urlForFetch = `http://localhost:3004/chats`;
-    const response = await fetch(urlForFetch);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${API_URL}/chats`);
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);

@@ -1,7 +1,7 @@
 export async function postUserData(url: string, data: { username: string; password: string; }) {
   try {
-    const urlForFetch = `http://localhost:3004/${url}`;
-    const response = await fetch(urlForFetch, {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${API_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

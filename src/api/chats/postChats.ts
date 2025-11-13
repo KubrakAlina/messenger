@@ -1,7 +1,7 @@
 export async function postChat(data: { user1: string; user2: string; }) {
   try {
-    const urlForFetch = `http://localhost:3004/chats`;
-    const response = await fetch(urlForFetch, {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const response = await fetch(`${API_URL}/chats`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
