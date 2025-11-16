@@ -21,7 +21,6 @@ export async function postChat(data: { user1: string; user2: string; }) {
     logger.error("Failed to post chat", error, {
       function: "postChat"
     });
-    console.error(error);
     return null;
   }
 }

@@ -30,4 +30,4 @@ server.post("/logs", (req, res) => {
 
 server.use(router);
 
-server.listen(3004, () => console.log("JSON Server running on 3004"));
+server.listen(3004);

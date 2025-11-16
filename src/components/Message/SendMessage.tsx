@@ -28,25 +28,22 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
       const newMessage = await postMessage(messageData);
       setText("");
       onSuccess(newMessage);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    } catch { };
 
 
-  return (
-    <div className={s.form_container}>
-      <form className={s.form}>
-        <input id="message" className={s.input} type="text"
-          placeholder="Message"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          autoComplete="off"
-        />
-        <button className={s.button} type="submit" onClick={handleSendMessage}>Send</button>
-      </form>
-    </div>
-  )
-}
+    return (
+      <div className={s.form_container}>
+        <form className={s.form}>
+          <input id="message" className={s.input} type="text"
+            placeholder="Message"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            autoComplete="off"
+          />
+          <button className={s.button} type="submit" onClick={handleSendMessage}>Send</button>
+        </form>
+      </div>
+    )
+  }
 
-export default SendMessage;
+  export default SendMessage;

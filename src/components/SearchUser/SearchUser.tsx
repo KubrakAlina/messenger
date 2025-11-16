@@ -52,6 +52,7 @@ function UserSearch() {
   async function createNewChat(userTo: UserData) {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
+      //add modal
       console.log("no stored user");
       return;
     }

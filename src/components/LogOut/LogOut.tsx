@@ -7,7 +7,9 @@ function LogOut() {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       localStorage.clear();
-    } else { console.log("you dont logged in") }
+    }
+    //add modal
+    else { console.log("you dont logged in") }
   }
 
 

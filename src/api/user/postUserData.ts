@@ -1,3 +1,5 @@
+import { logger } from "@/utils/clientLogger";
+
 export async function postUserData(url: string, data: { username: string; password: string; }) {
   try {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -14,10 +16,11 @@ export async function postUserData(url: string, data: { username: string; passwo
     }
 
     const result = await response.json();
-    console.log("Created ", result)
     return result;
   } catch (error) {
-    console.error("Post error:", error);
+    logger.error("Failed to post user data", error, {
+      function: "postUserData"
+    });
     return null;
   }
 }

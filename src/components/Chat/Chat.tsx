@@ -94,8 +94,6 @@ function Chat({ initMessages }: ChatProps) {
     return <p>There is no messages</p>;
   }
 
-  console.log({ currentUser, currentChat, chatPartner });
-
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
       <h2 className={s.header_title}>{chatPartner}</h2>
