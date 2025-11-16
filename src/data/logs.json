@@ -1,0 +1,15 @@
+[
+  {
+    "level": "error",
+    "timestamp": "2025-11-16T18:13:13.163Z",
+    "message": "Failed to fetch chat",
+    "error": {
+      "name": "Error",
+      "message": "Error: 404",
+      "stack": "Error: Error: 404\n    at fetchChats (http://localhost:3000/_next/static/chunks/_90807897._.js:56:19)\n    at async Chats.useEffect.loadChats (http://localhost:3000/_next/static/chunks/_90807897._.js:360:47)"
+    },
+    "context": {
+      "function": "fetchChats"
+    }
+  }
+]

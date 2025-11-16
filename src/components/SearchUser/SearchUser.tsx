@@ -24,7 +24,7 @@ function UserSearch() {
     loadUsers();
 
     //find logged user
-    const storedUser = localStorage.getItem("user");
+    const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       user.current = JSON.parse(storedUser);
     } else { return }
@@ -50,8 +50,9 @@ function UserSearch() {
 
   //create new chat
   async function createNewChat(userTo: UserData) {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = sessionStorage.getItem("user");
     if (!storedUser) {
+      //add modal
       console.log("no stored user");
       return;
     }

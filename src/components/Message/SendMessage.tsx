@@ -28,10 +28,8 @@ function SendMessage({ from, to, chatId, onSuccess }: SendMessageProps) {
       const newMessage = await postMessage(messageData);
       setText("");
       onSuccess(newMessage);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    } catch { };
+  }
 
 
   return (

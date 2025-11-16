@@ -25,9 +25,7 @@ function Chats() {
           setChats(filteredChats);
         }
         loadChats();
-      } catch (err) {
-        console.error(err);
-      }
+      } catch { }
     }
   }, [currentUser])
 

@@ -1,3 +1,5 @@
+import { logger } from "../../utils/clientLogger";
+
 export async function postChat(data: { user1: string; user2: string; }) {
   try {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -16,7 +18,9 @@ export async function postChat(data: { user1: string; user2: string; }) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error(error);
+    logger.error("Failed to post chat", error, {
+      function: "postChat"
+    });
     return null;
   }
 }

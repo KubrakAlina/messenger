@@ -1,4 +1,5 @@
 import { type UserData } from "../types";
+import { logger } from "@/utils/clientLogger";
 
 export async function fetchUser(): Promise<UserData[]> {
   try {
@@ -12,7 +13,9 @@ export async function fetchUser(): Promise<UserData[]> {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Loading error:", error);
+    logger.error("Failed to fetch user", error, {
+      function: "fetchUser"
+    });
     return [];
   }
 }

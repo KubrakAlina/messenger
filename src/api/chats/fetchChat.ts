@@ -1,4 +1,5 @@
 import { type ChatsData } from "../types";
+import { logger } from "../../utils/clientLogger";
 
 export async function fetchChat(id: string): Promise<ChatsData> {
   try {
@@ -12,7 +13,10 @@ export async function fetchChat(id: string): Promise<ChatsData> {
     const data = await response.json();
     return data[0] ?? {};
   } catch (error) {
-    console.error("Loading error:", error);
+    logger.error("Failed to fetch chat", error, {
+      function: "fetchChat",
+      request: { id },
+    });
     return {} as ChatsData;
   }
 }
