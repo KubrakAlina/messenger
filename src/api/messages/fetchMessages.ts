@@ -1,4 +1,5 @@
 import { type MessageData } from "../types";
+import { logger } from "../../utils/clientLogger";
 
 export async function fetchMessages({
   chatId,
@@ -7,9 +8,11 @@ export async function fetchMessages({
   chatId?: string;
   startFrom?: number;
 }): Promise<MessageData[]> {
+
   const endAt = startFrom + 20;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   try {
-    const urlForFetch = `http://localhost:3004/messages?chatId=${chatId}&_sort=-createdAt&_start=${startFrom}&_end=${endAt}`;
+    const urlForFetch = `${API_URL}/messages?chatId=${chatId}&_sort=-createdAt&_start=${startFrom}&_end=${endAt}`;
     const response = await fetch(urlForFetch);
 
 
@@ -20,7 +23,9 @@ export async function fetchMessages({
     const data = await response.json();
     return data.reverse();
   } catch (error) {
-    console.error("Loading error:", error);
+    logger.error("Failed to fetch messages", error, {
+      function: "fetchMessages"
+    });
     return [];
   }
 }
