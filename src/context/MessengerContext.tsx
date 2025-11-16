@@ -22,7 +22,7 @@ export function MessengerProvider({ children }: { children: ReactNode }) {
   const [chatPartner, setChatPartner] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       setCurrentUser(JSON.parse(storedUser));
     }
