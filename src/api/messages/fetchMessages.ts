@@ -16,7 +16,7 @@ export async function fetchMessages({
     const response = await fetch(urlForFetch);
 
 
-    if (!response.ok) {
+    if (response.status !== 200) {
       throw new Error(`Error: ${response.status}`);
     }
 

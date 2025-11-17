@@ -11,7 +11,7 @@ export async function postUserData(url: string, data: { username: string; passwo
       body: JSON.stringify(data)
     });
 
-    if (!response.ok) {
+    if (response.status !== 201) {
       throw new Error(`Error: ${response.status}`);
     }
 

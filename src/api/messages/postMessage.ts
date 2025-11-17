@@ -13,7 +13,7 @@ export async function postMessage(data: { from: string; to: string; text: string
       body: JSON.stringify(data)
     });
 
-    if (!response.ok) {
+    if (response.status !== 201) {
       throw new Error(`Error: ${response.status}`);
     }
 

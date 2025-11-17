@@ -6,7 +6,7 @@ export async function fetchChats(): Promise<ChatsData[]> {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const response = await fetch(`${API_URL}/chats`);
 
-    if (!response.ok) {
+    if (response.status !== 200) {
       throw new Error(`Error: ${response.status}`);
     }
     const data = await response.json();
