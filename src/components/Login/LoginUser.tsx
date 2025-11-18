@@ -1,20 +1,23 @@
 "use client"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { fetchUser } from "../../api/user/fetchUser";
 import s from "./login.module.scss";
 import { useRouter } from "next/navigation";
+import MessengerContext from "@/context/MessengerContext";
 
 function LoginUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [signUp, setSignUp] = useState(false)
   const router = useRouter();
+  const { setCurrentUser } = useContext(MessengerContext);
 
   const handleLogin = async () => {
     const users = await fetchUser();
     const user = users.find((u: { username: string; password: string; }) => u.username === username && u.password === password);
     if (user) {
       sessionStorage.setItem("user", JSON.stringify(user));
+      setCurrentUser(user);
       router.push('/chats')
     } else {
       setSignUp(true)
