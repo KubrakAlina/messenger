@@ -16,12 +16,12 @@ export async function fetchMessages({
     const response = await fetch(urlForFetch);
 
 
-    if (!response.ok) {
+    if (response.status !== 200) {
       throw new Error(`Error: ${response.status}`);
     }
 
     const data = await response.json();
-    return data.reverse();
+    return data;
   } catch (error) {
     logger.error("Failed to fetch messages", error, {
       function: "fetchMessages"

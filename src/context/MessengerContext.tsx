@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect, ReactNode } from "react"
 import { type UserData, ChatsData } from "@/api/types"
+import { fetchUser } from "@/api/user/fetchUser";
 
 interface MessengerContextType {
   currentUser: UserData | null;
@@ -10,8 +11,8 @@ interface MessengerContextType {
   currentChat: ChatsData | null;
   setCurrentChat: (chat: ChatsData | null) => void;
 
-  chatPartner: string | null;
-  setChatPartner: (user: string | null) => void;
+  chatPartner: UserData | null;
+  setChatPartner: (user: UserData | null) => void;
 }
 
 export const MessengerContext = createContext({} as MessengerContextType);
@@ -19,7 +20,7 @@ export const MessengerContext = createContext({} as MessengerContextType);
 export function MessengerProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [currentChat, setCurrentChat] = useState<ChatsData | null>(null);
-  const [chatPartner, setChatPartner] = useState<string | null>(null);
+  const [chatPartner, setChatPartner] = useState<UserData | null>(null);
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
@@ -30,7 +31,17 @@ export function MessengerProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (currentChat && currentUser) {
-      setChatPartner(currentChat.user1 === currentUser.id ? currentChat.user2 : currentChat.user1)
+      try {
+        const findChatPartner = async () => {
+          const partnerId = currentChat.user1 === currentUser.id ? currentChat.user2 : currentChat.user1;
+          const users = await fetchUser();
+          const chatPartner = users.find((user: { id: string; }) => partnerId === user.id);
+          if (chatPartner) {
+            setChatPartner(chatPartner)
+          }
+        }
+        findChatPartner();
+      } catch { }
     }
   }, [currentChat, currentUser]);
 

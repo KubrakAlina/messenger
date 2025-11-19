@@ -96,7 +96,7 @@ function Chat({ initMessages }: ChatProps) {
 
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
-      <h2 className={s.header_title}>{chatPartner}</h2>
+      <h2 className={s.header_title}>{chatPartner?.username}</h2>
       {isLoading && (
         <div className={s.loader_wrapper}>
           <div className={s.loader}></div>
@@ -115,7 +115,7 @@ function Chat({ initMessages }: ChatProps) {
       {currentUser && currentChat && chatPartner && (
         <SendMessage
           from={currentUser.id}
-          to={chatPartner}
+          to={chatPartner.id}
           chatId={currentChat.id}
           onSuccess={addMessage}
         />
