@@ -33,7 +33,7 @@ export function MessengerProvider({ children }: { children: ReactNode }) {
     if (currentChat && currentUser) {
       try {
         const findChatPartner = async () => {
-          const partnerId = currentChat.user1 === currentUser.id ? currentChat.user2 : currentChat.user1;
+          const partnerId = currentChat.user1.id === currentUser.id ? currentChat.user2.id : currentChat.user1.id;
           const users = await fetchUser();
           const chatPartner = users.find((user: { id: string; }) => partnerId === user.id);
           if (chatPartner) {

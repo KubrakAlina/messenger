@@ -58,7 +58,7 @@ function UserSearch() {
     }
 
     const user = JSON.parse(storedUser) as UserData;
-    const newChat: ChatsData = { user1: user.id, user2: userTo.id };
+    const newChat: ChatsData = { user1: { id: user.id, name: user.name }, user2: { id: userTo.id, name: userTo.name } };
     const result = await postChat(newChat);
     return result;
   }

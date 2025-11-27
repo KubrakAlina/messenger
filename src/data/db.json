@@ -64,28 +64,58 @@
   "chats": [
     {
       "id": "sfjvs",
-      "user1": "1",
-      "user2": "2"
+      "user1": {
+        "id": "1",
+        "name": "Alina"
+      },
+      "user2": {
+        "id": "2",
+        "name": "Ilia"
+      }
     },
     {
       "id": "akd93",
-      "user1": "1",
-      "user2": "3"
+      "user1": {
+        "id": "1",
+        "name": "Alina"
+      },
+      "user2": {
+        "id": "3",
+        "name": "Maria"
+      }
     },
     {
       "id": "plm28",
-      "user1": "1",
-      "user2": "4"
+      "user1": {
+        "id": "1",
+        "name": "Alina"
+      },
+      "user2": {
+        "id": "4",
+        "name": "Dmitry"
+      }
     },
     {
       "id": "zqx91",
-      "user1": "1",
-      "user2": "5"
+      "user1": {
+        "id": "1",
+        "name": "Alina"
+      },
+      "user2": {
+        "id": "5",
+        "name": "Sergey"
+      }
     },
     {
-      "user1": "1",
-      "user2": "2",
-      "id": "OyInXXL"
+      "user1": {
+        "id": "1",
+        "name": "Alina"
+      },
+      "user2": {
+        "id": "6",
+        "name": "Olga"
+      },
+      "id": "ungs7b_"
     }
   ],
   "messages": [
@@ -464,6 +494,14 @@
       "createdAt": 1763492953867,
       "chatId": "sfjvs",
       "id": "95AqfPH"
+    },
+    {
+      "from": "1",
+      "to": "6",
+      "text": "hello",
+      "createdAt": 1764277476083,
+      "chatId": "ungs7b_",
+      "id": "iTgjqb7"
     }
   ]
 }

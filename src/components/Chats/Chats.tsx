@@ -21,10 +21,11 @@ function Chats() {
         const loadChats = async () => {
           const chatsData = await fetchChats();
           const filteredChats = chatsData.filter(
-            (chat) => chat.user1 === currentUser?.id || chat.user2 === currentUser?.id
+            (chat) => chat.user1.id === currentUser?.id || chat.user2.id === currentUser?.id
           );
           setChats(filteredChats);
         }
+
         loadChats();
       } catch { }
     }
@@ -39,13 +40,13 @@ function Chats() {
       <UserSearch />
       <ul className={s.item_list}>
         {chats.map((item: ChatsData) => {
-          if (item.user1 !== currentUser?.id && item.user2 !== currentUser?.id) return null;
+          if (item.user1.id !== currentUser?.id && item.user2.id !== currentUser?.id) return null;
           return (
             <li className={s.item}
               key={item.id}
               onClick={() => handleClick(item)}
             >
-              Open chat {item.id}
+              {item.user1.id === currentUser?.id ? item.user2.name : item.user1.name}
             </li>)
         })
         }
