@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import UserSearch from "../SearchUser/SearchUser";
 import MessengerContext from "@/context/MessengerContext";
 import s from "./chats.module.scss";
+import Modal from "../Modal/Modal";
 
 function Chats() {
   const router = useRouter();
@@ -49,6 +50,9 @@ function Chats() {
         })
         }
       </ul>
+      {!currentUser && (
+        <Modal />
+      )}
     </div>
   )
 }

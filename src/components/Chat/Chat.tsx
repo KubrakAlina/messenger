@@ -6,12 +6,15 @@ import { fetchMessages } from "../../api/messages/fetchMessages";
 import s from "./chat.module.scss";
 import SendMessage from "../Message/SendMessage";
 import MessengerContext from "@/context/MessengerContext";
+import Modal from "../Modal/Modal";
+import { useRouter } from "next/navigation";
 
 interface ChatProps {
   initMessages: MessageData[];
 }
 
 function Chat({ initMessages }: ChatProps) {
+  const router = useRouter();
   const [messages, setMessages] = useState<MessageData[]>(initMessages);
   const startFrom = useRef(20);
   const [hasMore, setHasMore] = useState(true);
@@ -90,13 +93,21 @@ function Chat({ initMessages }: ChatProps) {
     setShouldScroll(true);
   };
 
+  function handleClick() {
+    router.push(`/chats`);
+  }
+
   if (!messages) {
     return <p>There is no messages</p>;
   }
 
   return (
     <div className={s.chat_container} ref={chatRef} onScroll={handleScroll}>
-      <h2 className={s.header_title}>{chatPartner?.username}</h2>
+      <div className={s.header}>
+        <button className={s.back_button} onClick={handleClick}></button>
+        <h2 className={s.header_title}>{chatPartner?.username}</h2>
+      </div>
+
       {isLoading && (
         <div className={s.loader_wrapper}>
           <div className={s.loader}></div>
@@ -119,6 +130,9 @@ function Chat({ initMessages }: ChatProps) {
           chatId={currentChat.id}
           onSuccess={addMessage}
         />
+      )}
+      {!currentUser && (
+        <Modal />
       )}
     </div>
   );
