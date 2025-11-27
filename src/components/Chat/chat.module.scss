@@ -8,17 +8,25 @@
   scroll-behavior: smooth;
 }
 
-.header_title {
-  margin: 0;
-  font-size: 20px;
-  padding: 16px;
-  display: block;
+.header {
+  display: flex;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   background-color: $light-green;
   color: $brown;
+  align-items:center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.header_title {
+  margin: 0;
+  font-size: 20px;
+  padding: 16px;
+  flex-grow: 1;
+  text-transform: capitalize;
 }
 
 .messages_list {
@@ -50,4 +58,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.back_button {
+  display: block;
+  width: 50px;
+  height: 50px;
+  mask-image: url("../../../public/arrow.svg");
+  mask-size: 25px 25px;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  background-color: $brown;
 }
